@@ -1,0 +1,3 @@
+starfruit_shop_homepage:
+    path:     /starfruit_shop
+    defaults: { _controller: StarfruitShopBundle\Controller\DefaultController::indexAction }
