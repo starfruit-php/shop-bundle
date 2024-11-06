@@ -20,9 +20,9 @@ services:
         resource: '../src/Model'
         public: true
 
-    # Starfruit\ShopBundle\Event\:
-    #     resource: '../src/Event'
-    #     public: true
+    Starfruit\ShopBundle\Extension\:
+        resource: '../src/Extension'
+        public: true
 
     # authentication login listener for updating e-commerce framework environment after login
     Starfruit\ShopBundle\EventListener\AuthenticationLoginListener: ~
