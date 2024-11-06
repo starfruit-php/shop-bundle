@@ -23,18 +23,4 @@ abstract class AbstractProduct extends \Pimcore\Bundle\EcommerceFrameworkBundle\
     {
         return 'default';
     }
-
-    /**
-     * @return string|null
-     */
-    public function getPrice()
-    {
-        $saleInformationBrick = $this->getSaleInformation();
-        $saleInformation = $saleInformationBrick->getSaleInformation();
-        if ($saleInformation) {
-            return $saleInformation->getPriceInEUR();
-        }
-
-        return null;
-    }
 }
