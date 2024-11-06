@@ -11,7 +11,7 @@ use Pimcore\Model\DataObject\FilterDefinition;
 use Starfruit\ShopBundle\Model\AbstractCategory;
 use Starfruit\BuilderBundle\Tool\SystemTool;
 
-class ProductBaseController extends \Pimcore\Controller\BaseController
+class ProductBaseController extends BaseController
 {
     protected $request;
     protected $translator;
