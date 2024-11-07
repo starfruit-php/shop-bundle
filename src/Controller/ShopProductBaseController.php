@@ -1,18 +1,16 @@
 <?php
 
-namespace Starfruit\ShopBundle\Extension;
+namespace Starfruit\ShopBundle\Controller;
 
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
-
-use Symfony\Component\HttpFoundation\RequestStack;
+use Starfruit\BuilderBundle\Tool\SystemTool;
 use Pimcore\Bundle\EcommerceFrameworkBundle\Factory;
 use Pimcore\Bundle\EcommerceFrameworkBundle\FilterService\ListHelper;
-use Knp\Component\Pager\PaginatorInterface;
 use Pimcore\Translation\Translator;
+use Knp\Component\Pager\PaginatorInterface;
+
 use Starfruit\ShopBundle\Service\ProductService;
 
-class ProductExtension extends AbstractExtension
+class ShopProductBaseController extends BaseController
 {
     protected $request;
     protected $ecommerceFactory;
@@ -21,31 +19,20 @@ class ProductExtension extends AbstractExtension
     protected $translator;
 
     public function __construct(
-        RequestStack $requestStack,
         Factory $ecommerceFactory,
         ListHelper $listHelper,
         PaginatorInterface $paginator,
         Translator $translator,
         )
     {
-        $this->request = $requestStack->getCurrentRequest();
+        $this->request = SystemTool::getRequest();
         $this->ecommerceFactory = $ecommerceFactory;
         $this->listHelper = $listHelper;
         $this->paginator = $paginator;
         $this->translator = $translator;
     }
 
-    /**
-     * @return array|TwigFunction[]
-     */
-    public function getFunctions()
-    {
-        return [
-            new TwigFunction('shop_product_listing', [$this, 'listing']),
-        ];
-    }
-
-    public function listing()
+    public function getList()
     {
         $params = ProductService::getList($this->request, $this->ecommerceFactory, $this->listHelper, $this->paginator);
 
