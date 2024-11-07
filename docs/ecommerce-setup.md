@@ -18,7 +18,7 @@
 
 - Create an item in `Website Settings` with name `fallbackFilterdefinition` and value is default `FilterDefinition` object
 - `FilterDefinition` objects with `FilterCategory` must have the `Include SubCategories` field checked
-- Create templates for filter config or overwritten it, [see config here](../../config/pimcore/ecommerce-filter.yaml)
+- Create templates for filter config or overwritten it, [see config here](./../config/pimcore/ecommerce-filter.yaml)
 - Example code to render filter in template [here](helper-functions.md#using-ecommerce-filter)
 
 ## Index config
