@@ -13,7 +13,7 @@ class ShopCartBaseController extends BaseController
 {
     const DEFAULT_CART_NAME = 'cart';
     const CSRF_TOKEN_NAME = '_csrf_token';
-    const ADD_TOKEN_NAME = 'shop-add-cart';
+    const ADD_TOKEN_NAME = 'shop-cart-add';
     const UPDATE_TOKEN_NAME = 'shop-cart-listing';
 
     protected $request;
@@ -33,7 +33,7 @@ class ShopCartBaseController extends BaseController
 
     protected function getAddTokenName(): string
     {
-        return self::ADD_CART_TOKEN_NAME;
+        return self::ADD_TOKEN_NAME;
     }
 
     protected function getUpdateTokenName(): string
