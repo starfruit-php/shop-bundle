@@ -14,6 +14,13 @@
 - Set `Parent PHP Class` in `General Setting` = `Starfruit\ShopBundle\Model\AbstractProduct`
 - Create `categories` field with type `Many-To-Many Object Relation` and mapping to `Category` class
 
+### FilterDefinition
+
+- Create an item in `Website Settings` with name `fallbackFilterdefinition` and value is default `FilterDefinition` object
+- `FilterDefinition` objects with `FilterCategory` must have the `Include SubCategories` field checked
+- Create templates for filter config or overwritten it, (see config here)[../../config/pimcore/ecommerce-filter.yaml]
+- Example code to render filter in template (here)[helper-functions.md#using-ecommerce-filter]
+
 ## Index config
 
 - Create `ecommerce.yaml` file in `config`, example content:
