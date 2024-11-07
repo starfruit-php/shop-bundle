@@ -14,7 +14,7 @@ class ShopCartBaseController extends BaseController
     const DEFAULT_CART_NAME = 'cart';
     const CSRF_TOKEN_NAME = '_csrf_token';
     const ADD_TOKEN_NAME = 'shop-add-cart';
-    const UPDATE_TOKEN_NAME = 'shop-add-listing';
+    const UPDATE_TOKEN_NAME = 'shop-cart-listing';
 
     protected $request;
     protected $factory;
@@ -60,7 +60,7 @@ class ShopCartBaseController extends BaseController
     public function add()
     {
         if (!$this->isCsrfTokenValid(
-            $this->getAddCartTokenName(),
+            $this->getAddTokenName(),
             $this->request->request->get($this->getCsrfTokenName())
         )) {
             return;
