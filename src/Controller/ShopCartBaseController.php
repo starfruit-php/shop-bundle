@@ -15,6 +15,7 @@ class ShopCartBaseController extends BaseController
     const CSRF_TOKEN_NAME = '_csrf_token';
     const ADD_TOKEN_NAME = 'shop-cart-add';
     const UPDATE_TOKEN_NAME = 'shop-cart-listing';
+    const CLEAR_TOKEN_NAME = 'shop-cart-clear';
 
     protected $request;
     protected $factory;
@@ -44,6 +45,11 @@ class ShopCartBaseController extends BaseController
     protected function getRemoveTokenName(): string
     {
         return self::UPDATE_TOKEN_NAME;
+    }
+
+    protected function getClearTokenName(): string
+    {
+        return self::CLEAR_TOKEN_NAME;
     }
 
     protected function getCsrfTokenName(): string
@@ -133,6 +139,20 @@ class ShopCartBaseController extends BaseController
 
         $cart = $this->getCart();
         $cart->removeItem($id);
+        $cart->save();
+    }
+
+    public function clear()
+    {
+        if (!$this->isCsrfTokenValid(
+            $this->getClearTokenName(),
+            $this->request->request->get($this->getCsrfTokenName())
+        )) {
+            return;
+        }
+
+        $cart = $this->getCart();
+        $cart->clear();
         $cart->save();
     }
 
