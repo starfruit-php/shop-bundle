@@ -1,0 +1,22 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+pimcore:
+    models:
+        class_overrides:
+            Pimcore\Model\DataObject\Customer: Starfruit\ShopBundle\Model\Customer
+
+    security:
+        # the encoder factory as shipped by the CMF
+        password_hasher_factories:
+            Pimcore\Model\DataObject\Customer: cmf.security.user_password_hasher_factory
+
+pimcore_customer_management_framework:
+
+    # Configuration of customer save manager
+    customer_save_manager:
+        # If enabled the automatic object naming scheme will be applied on each customer save. See: customer_provider -> namingScheme option
+        enableAutomaticObjectNamingScheme: false
