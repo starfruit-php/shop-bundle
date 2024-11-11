@@ -2,6 +2,6 @@
 
 namespace Starfruit\ShopBundle\Model;
 
-abstract class AbstractCustomer extends \CustomerManagementFrameworkBundle\Model\AbstractCustomer\DefaultAbstractUserawareCustomer`
+abstract class AbstractCustomer extends \CustomerManagementFrameworkBundle\Model\AbstractCustomer\DefaultAbstractUserawareCustomer
 {
 }
