@@ -15,6 +15,7 @@ class ShopCartBaseController extends BaseController
     const CSRF_TOKEN_NAME = '_csrf_token';
     const ADD_TOKEN_NAME = 'shop-cart-add';
     const UPDATE_TOKEN_NAME = 'shop-cart-listing';
+    const REMOVE_TOKEN_NAME = 'shop-cart-remove';
     const CLEAR_TOKEN_NAME = 'shop-cart-clear';
 
     protected $request;
@@ -44,7 +45,7 @@ class ShopCartBaseController extends BaseController
 
     protected function getRemoveTokenName(): string
     {
-        return self::UPDATE_TOKEN_NAME;
+        return self::REMOVE_TOKEN_NAME;
     }
 
     protected function getClearTokenName(): string
@@ -84,7 +85,13 @@ class ShopCartBaseController extends BaseController
             return;
         }
 
-        $cart->addItem($product, 1);
+        $quantity = (int) $this->request->get('quantity');
+        $quantity = $quantity > 0 ? $quantity : 1;
+
+        $itemKey = $this->request->get('itemKey');
+        $comment = $this->request->get('comment');
+
+        $cart->addItem($product, $quantity, $itemKey, false, [], [], $comment);
         $cart->save();
     }
 
@@ -104,6 +111,7 @@ class ShopCartBaseController extends BaseController
 
             foreach ($items as $item) {
                 $itemKey = $item['key'];
+                $id = isset($item['id']) ? $item['id'] : $itemKey;
                 $quantity = $item['quantity'];
 
                 if (!is_numeric($quantity)) {
@@ -114,7 +122,7 @@ class ShopCartBaseController extends BaseController
                     break;
                 }
 
-                $product = AbstractProduct::getById($itemKey);
+                $product = AbstractProduct::getById($id);
                 if ($product instanceof CheckoutableInterface) {
                     $cart->updateItem($itemKey, $product, floor($quantity), true);
                 }
@@ -134,11 +142,13 @@ class ShopCartBaseController extends BaseController
             return;
         }
 
-        $id = $this->request->query->getInt('id');
-        $product = AbstractProduct::getById($id);
+        $key = $this->request->get('key');
+        if (!$key) {
+            return;
+        }
 
         $cart = $this->getCart();
-        $cart->removeItem($id);
+        $cart->removeItem($key);
         $cart->save();
     }
 
@@ -160,7 +170,6 @@ class ShopCartBaseController extends BaseController
     {
         
     }
-
 
     public function removeVoucher()
     {
