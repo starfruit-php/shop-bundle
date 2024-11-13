@@ -73,7 +73,7 @@ class ShopCartBaseController extends BaseController
             return;
         }
 
-        $id = $this->request->query->getInt('id');
+        $id = (int) $this->request->get('id');
         $product = AbstractProduct::getById($id);
 
         if (null === $product) {
