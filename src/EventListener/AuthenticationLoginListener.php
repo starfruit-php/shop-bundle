@@ -75,7 +75,7 @@ class AuthenticationLoginListener implements EventSubscriberInterface, LoggerAwa
             if ($oldCart instanceof CartInterface && count($oldCart->getItems()) > 0) {
                 $userCart = $this->factory->getCartManager()->getOrCreateCartByName(self::DEFAULT_CART_NAME);
                 foreach ($oldCart->getItems() as $item) {
-                    $userCart->addItem($item->getProduct(), $item->getCount());
+                    $userCart->addItem($item->getProduct(), $item->getCount(), $item->getItemKey(), false, [], [], $item->getComment());
                 }
                 $userCart->save();
             }

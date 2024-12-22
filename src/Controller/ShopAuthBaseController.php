@@ -58,7 +58,7 @@ class ShopAuthBaseController extends BaseController
 
         // log user in manually
         // pass response to login manager as it adds potential remember me cookies
-        $loginManager->login($customer, $this->request, $response);
+        $this->loginManager->login($customer, $this->request, $response);
 
         //do ecommerce framework login
         $this->authenticationLoginListener->doEcommerceFrameworkLogin($customer);
