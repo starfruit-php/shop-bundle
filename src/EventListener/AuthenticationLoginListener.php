@@ -63,7 +63,6 @@ class AuthenticationLoginListener implements EventSubscriberInterface, LoggerAwa
     public function doEcommerceFrameworkLogin(CustomerInterface $customer)
     {
         if ($customer) {
-
             //migrate current cart entries to cart of to-log-in users cart
             $cartManager = $this->factory->getCartManager();
             $oldCart = $cartManager->getCartByName(self::DEFAULT_CART_NAME);
@@ -80,7 +79,7 @@ class AuthenticationLoginListener implements EventSubscriberInterface, LoggerAwa
                 $userCart->save();
             }
         } else {
-            $this->environment->setCurrentUserId(null);
+            $this->environment->setCurrentUserId(-1);
         }
 
         $this->environment->save();

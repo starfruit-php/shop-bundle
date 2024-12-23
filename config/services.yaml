@@ -32,9 +32,7 @@ services:
     Starfruit\ShopBundle\EventListener\AuthenticationLoginListener: ~
 
     # authentication login listener for updating e-commerce framework environment after logout
-    Starfruit\ShopBundle\EventListener\AuthenticationLogoutListener:
-        tags:
-            - { name: 'kernel.event_subscriber', dispatcher: 'security.event_dispatcher.pimcore_admin' }
+    Starfruit\ShopBundle\EventListener\AuthenticationLogoutListener: ~
 
 # add more services, or override services that need manual wiring
 #    Starfruit\ShopBundle\ExampleClass:
