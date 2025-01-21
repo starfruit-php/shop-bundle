@@ -11,9 +11,10 @@ class ProductService
         $ecommerceFactory,
         $listHelper,
         $paginator,
+        $customParams = []
     )
     {
-        $params = array_merge($request->query->all(), $request->attributes->all());
+        $params = array_merge($customParams, $request->query->all(), $request->attributes->all());
 
         //needed to make sure category filter filters for active category
         $params['parentCategoryIds'] = $params['category'] ?? null;

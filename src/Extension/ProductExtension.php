@@ -45,9 +45,9 @@ class ProductExtension extends AbstractExtension
         ];
     }
 
-    public function listing()
+    public function listing($customParams = [])
     {
-        $params = ProductService::getList($this->request, $this->ecommerceFactory, $this->listHelper, $this->paginator);
+        $params = ProductService::getList($this->request, $this->ecommerceFactory, $this->listHelper, $this->paginator, $customParams);
 
         return $params;
     }
